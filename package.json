@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "4.16.2"
+    "angular": "1.6.8",
+    "express": "4.16.2",
+    "mongoose": "4.13.7",
+    "webpack": "^3.10.0"
   }
 }
