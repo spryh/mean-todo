@@ -1,5 +1,7 @@
 'use strict'
 
+//debugger
+
 var express = require('express')
 var router = require('./api')
 
