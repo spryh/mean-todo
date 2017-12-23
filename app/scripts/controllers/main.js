@@ -1,6 +1,15 @@
 'use strict';
 
-function MainCtrl ($scope, dataService) {
+function MainCtrl ($scope, $log, $interval, dataService) {
+
+  // $log.log, warn, error
+  $scope.seconds = 0 
+  $scope.counter = function(){
+    $scope.seconds++
+    $log.log($scope.seconds + ' seconds have passed.')
+  }
+
+  $interval($scope.counter, 1000, 10)
 
   dataService.getTodos(function(response){
     var todos = response.data.todos;

@@ -124,7 +124,15 @@ angular.module('todoListApp').controller('todoCtrl', __webpack_require__(9));
 "use strict";
 
 
-function MainCtrl ($scope, dataService) {
+function MainCtrl ($scope, $log, $interval, dataService) {
+
+  $scope.seconds = 0 
+  $scope.counter = function(){
+    $scope.seconds++
+    $log.log($scope.seconds + ' seconds have passed.')
+  }
+
+  $interval($scope.counter, 1000, 10)
 
   dataService.getTodos(function(response){
     var todos = response.data.todos;
