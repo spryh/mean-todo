@@ -12,12 +12,12 @@ var router = express.Router()
 // TODO: Add GET route to retrieve entries
 
 router.get('/todos', (req, res) => {
-  Todo.find({}, (err, todosArr) => {
+  Todo.find({}, (err, todos) => {
     if (err) {
       // Better handling then console logging. 500 is an internal server error.
       return res.status(500).json({ message: err.message })
     }
-    res.json({ todos: todosArr })
+    res.json({ todos: todos })
   })
 })
 
@@ -52,5 +52,14 @@ router.put('/todos/:id', (req, res) => {
 })
 
 // TODO: Add DELETE route to delete entries
+router.delete('/todos/:id', function(req, res) {
+  var id = req.params.id;
+  Todo.findByIdAndRemove(id, function(err, result) {
+    if (err) {
+      return res.status(500).json({ err: err.message });
+    }
+    res.json({ message: 'Todo Deleted' });
+  });
+});
 
 module.exports = router
