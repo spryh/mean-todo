@@ -34,6 +34,23 @@ router.post('/todos', (req, res) => {
 })
 
 // TODO: Add PUT route to update existing entries
+router.put('/todos/:id', (req, res) => {
+  var todo = req.body
+  var id = req.params.id
+
+  if (todo && todo._id !== id) {
+    return res.status(500).json({ err: "Document ID's dont match." })
+  }
+
+  // Use with option new to return updated data
+  Todo.findByIdAndUpdate(id, todo, {new: true}, (err, todo) => {
+    if (err) {
+      return res.status(500).json({ message: err.message })
+    }
+    res.json({'todo': todo, message: 'Todo Updated' })
+  })
+})
+
 // TODO: Add DELETE route to delete entries
 
 module.exports = router
